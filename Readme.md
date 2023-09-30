@@ -20,6 +20,17 @@ The generator will create a properly formatted template file ready for competiti
 - **Language Support:** Choose from C++, Java, or Python to create your templates.
 - **Codeforces Integration:** Seamlessly integrate with Codeforces by providing the problem code.
 
+## Installation
+
+### Windows
+
+* Run ```go build``` to create an executable file for your OS. 
+* Then, add the executable to your PATH.
+* Rename the executable to ```cft.exe```.
+* Now, you can use the tool by typing ```cft``` in the terminal.
+
+
+
 
 ## How to Use
 
@@ -38,3 +49,7 @@ cft 123/A cpp
 ```
 
 This command will create a properly formatted C++ template file for the specified problem code (123A) ready for competitive programming.
+
+
+### Notes
+* Currently only java and cpp are supported.
