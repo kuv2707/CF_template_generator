@@ -1,7 +1,7 @@
 package main
 
 import (
-	Parse "cf_template_generator/Parse"
+	"cf_template_generator/Parse"
 	"cf_template_generator/langTemplates"
 	"fmt"
 	"os"
@@ -9,33 +9,23 @@ import (
 
 func main() {
 	url, lang := Parse.FathomArgsAndValidate(os.Args)
-	fmt.Println("url: ", url)
-	fmt.Println("lang: ", lang)
-	if true {
-		return
-	}
+	fmt.Println("problem url: ", url)
+	fmt.Println("chosen lang: ", lang)
+	
+
+	langTemplates.TemplateInfo["QUESTION_URL"] = url
+	langTemplates.TemplateInfo["lang"] = lang
+	langTemplates.TemplateInfo["TESTCASETEMPLATE"] = "while(false){}"
+
 	domstr, err := Parse.ApiCall(url)
 	if err != nil {
-		fmt.Println("Error: ", err," Creating default template for ",lang)
-		langTemplates.CreateTemplate(langTemplates.DefaultTemplate)
+		fmt.Println("Error in getting question info: ", err,"\n Creating default template")
+		langTemplates.CreateTemplate()
 		return
 	}
+	// langTemplates.WriteToFile("dom.html", domstr)
 
-	// domstr:=`
-	// <div class="problem-statement"><h1>This is the heading</h1></div>
-	// `
-
-	pwd, err := os.Getwd()
-	if err != nil {
-		fmt.Println(err)// if cant access pwd, then cant write to file either
-		return
-	}
-	
-	problem_info:=Parse.ParseProblem(domstr)
-	
-	
-	fmt.Println("Creating template for ",lang," at ",pwd)
+	Parse.ParseProblem(domstr)
+	langTemplates.CreateTemplate()
 
 }
-
-

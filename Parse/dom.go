@@ -28,24 +28,33 @@ func printDOM(node *html.Node) {
 	}
 }
 
-func traverseDOM(node *html.Node) *html.Node {
+func findNodeInDOM(node *html.Node,key string, value string) *html.Node {
 	if node.Type == html.ElementNode && node.FirstChild != nil {
 		for _, attr := range node.Attr {
 			// fmt.Printf("Attribute: %s=\"%s\"\n", attr.Key, attr.Val)
-			if attr.Key == "class" && attr.Val == "problem-statement" {
-				fmt.Println("found")
+			if attr.Key == key && attr.Val == value {
 				return node
 			}
 		}
-
 	}
-
 	for child := node.FirstChild; child != nil; child = child.NextSibling {
-		n := traverseDOM(child)
+		n := findNodeInDOM(child,key,value)
 		if n != nil {
 			return n
 		}
 
 	}
 	return nil
+}
+
+
+func allStrContentInDOM(node *html.Node)string{
+	if node.Type == html.TextNode {
+		return node.Data
+	}
+	ret:=""
+	for child := node.FirstChild; child != nil; child = child.NextSibling {
+		ret+=allStrContentInDOM(child)
+	}
+	return ret
 }

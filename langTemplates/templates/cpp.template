@@ -1,0 +1,131 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// Types
+#define ll long long
+#define pll pair<ll,ll>
+#define pss pair<string,string>
+#define vll vector<ll>
+#define vvll vector<vll>
+#define vpll vector<pll>
+const ll M = 1e18 + 7;
+
+//Functions
+#define f(i,s,e) for(ll i=s; i<e; ++i)
+#define cf(i,s,e) for(ll i=s; i<=e; ++i)
+//* closed f -> cf
+#define rf(i,s,e) for(ll i=e; i>=s; --i)
+
+//* Bit Manipulation
+ll noOfSetBits(ll &x) {
+    return __builtin_popcountll(x);
+}
+
+bool isEven(ll &x) {
+    return !(x&1);
+}
+
+char toLower(char &x) {
+    return x | ' ';
+}
+
+char toUpper(char &x) {
+    return x & '_';
+}
+
+//Utilities
+#define endl "\n"
+void scan(ll &n) {
+    bool negative = false;
+    register char c;
+    n = 0;
+    c = getchar();
+    if (c=='-')
+    {
+        negative = true;
+        c = getchar();
+    }
+    for (; (c>47 && c<58); c=getchar()) {
+        n = n *10 + c - 48;
+    }
+    if (negative) n *= -1;
+}
+#define nl cout << "\n"
+ll minInVec(vll &v) {
+    return *min_element(v.begin(), v.end());
+} 
+
+ll maxInVec(vll &v) {
+    return *max_element(v.begin(), v.end());
+} 
+
+ll sumOfVec(vll &v) {
+    return accumulate(v.begin(), v.end(),0);
+}
+
+ll countInVec(vll &v, ll &x) {
+    return count(v.begin(), v.end(),x);
+}
+
+void takeVector(vll &v, int &n) {
+    f(i,0,n) {
+        ll x;
+        cin >> x;
+        v.push_back(x);
+    }
+}
+
+void printVector(vll &v) {
+    for(auto &i:v) {
+        cout << i << " ";
+    }
+    cout << endl;
+}
+
+ll binMul(ll a, ll b) {
+    ll ans = 0;
+    while(b) {
+        if(b&1) {
+            ans = (ans + a) % M;
+        }
+        a = (a+a) % M;
+        b >>= 1;
+    }
+    return ans;
+}
+
+ll binExp(ll &a, ll &b) {
+    ll ans = 1;
+    while(b) {
+        if(b&1) {
+            ans = binMul(ans,a);
+        }
+        a = binMul(a,a);
+        b >>= 1;
+    }
+    return ans;
+}
+
+void yes() {
+    cout << "YES" << endl;
+}
+void no() {
+    cout << "NO" << endl;
+}
+
+
+
+//Start writing from here
+//QUESTION_URL
+void solve() {
+    
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0); 
+    cout.tie(0);
+    TESTCASETEMPLATE
+    return 0;
+}
+
