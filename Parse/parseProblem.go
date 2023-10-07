@@ -28,11 +28,11 @@ func ParseProblem(domstr string) {
 	inp := findNodeInDOM(ps, "class", "input-specification")
 
 	strcontent := allStrContentInDOM(inp)
-	includeLoop := strings.ContainsAny(strcontent, "multiple test cases")
+	includeLoop := strings.Contains(strcontent, "test cases")
 	if includeLoop {
-		langTemplates.TemplateInfo["TESTCASETEMPLATE"] = langTemplates.LoopSyntax(langTemplates.TemplateInfo["lang"])
+		langTemplates.TemplateInfo["TESTCASETEMPLATE"] = langTemplates.Syntaxes[langTemplates.TemplateInfo["lang"]][0]
 	} else {
-		langTemplates.TemplateInfo["TESTCASETEMPLATE"] = ""
+		langTemplates.TemplateInfo["TESTCASETEMPLATE"] = langTemplates.Syntaxes[langTemplates.TemplateInfo["lang"]][1]
 	}
 
 	return
